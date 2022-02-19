@@ -43,18 +43,20 @@ function Wallet() {
                 }
                 else {
                     setWallet(res[0]);
-                    if (res[0] != null){
+                    if (res[0] != null) {
                         navigate("/chat", { state: { wallet: res[0] } });
                     }
                 }
             })
         }
-        getAcc();
+        if (isMetaMaskInstalled) {
+            getAcc();
+        }
     }, []);
 
     useEffect(() => {
-        if (wallet != null && wallet!=""){
-            navigate("/enter", { state: { wallet: wallet} });
+        if (wallet != null && wallet != "") {
+            navigate("/enter", { state: { wallet: wallet } });
         }
     }, [wallet])
 
