@@ -12,9 +12,23 @@ function Connect() {
 
     const location = useLocation();
 
+    let navigate = useNavigate();
+
+    if (location.state == null) {
+        location.state = {
+            partnerWallet: null,
+            wallet: null,
+            roomId: null
+        }
+    }
+
     const wallet = location.state.wallet;
 
-    let navigate = useNavigate();
+    useEffect(() => {
+        if (wallet == null) {
+            navigate("/notfound");
+        }
+    }, [])
 
     const [partnerWallet, setPartnerWallet] = useState("");
 
@@ -35,7 +49,7 @@ function Connect() {
             sha256(partnerWallet[4] > wallet[4] ?
                 partnerWallet + wallet : wallet + partnerWallet).slice(0, 8);
 
-        navigate("/chat", {
+        navigate("/chat/" + id, {
             state: {
                 wallet: wallet,
                 partnerWallet: partnerWallet,
