@@ -78,12 +78,15 @@ function Chat() {
             i++;
             if (i % 3 == 0) {
                 console.log(messages);
-                dispatch({ message: m.message, createdAt: m.createdAt });
+                dispatch({ message: m.message, createdAt: m.createdAt, from: m.from });
                 console.log(state);
                 setIt(it + 1);
             }
         });
 
+        gun.on("set", () => {
+            setIt(it+1);
+        })
 
     }, []);
 
@@ -92,9 +95,10 @@ function Chat() {
         const chatRoom = gun.get(roomId);
 
         chatRoom.set(
-            {
+            {   
+                from: wallet,
                 message: formState.message,
-                createdAt: Date.now()
+                createdAt: new Date().toISOString()
             }
         );
 
@@ -122,7 +126,7 @@ function Chat() {
                     state.messages.map((message, i) => (
                         <div key={i}>
                             <h2>{message.message}</h2>
-                            <h3>From: {wallet}</h3>
+                            <h3>From: {message.from}</h3>
                             <p>Date: {message.createdAt}</p>
                         </div>
                     ))

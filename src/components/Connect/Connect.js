@@ -28,6 +28,9 @@ function Connect() {
         if (wallet == null) {
             navigate("/notfound");
         }
+        else{
+            console.log(wallet);
+        }
     }, [])
 
     const [partnerWallet, setPartnerWallet] = useState("");
