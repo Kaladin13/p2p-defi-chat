@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Gun from "gun";
 import "gun/sea";
 import sha256 from "js-sha256";
+import './Chat.css';
+import logo from "./zerionlogo.jpg";
+
 
 
 
@@ -85,7 +88,7 @@ function Chat() {
         });
 
         gun.on("set", () => {
-            setIt(it+1);
+            setIt(it + 1);
         })
 
     }, []);
@@ -95,7 +98,7 @@ function Chat() {
         const chatRoom = gun.get(roomId);
 
         chatRoom.set(
-            {   
+            {
                 from: wallet,
                 message: formState.message,
                 createdAt: new Date().toISOString()
@@ -104,33 +107,41 @@ function Chat() {
 
         setForm({
             message: ''
-          });
+        });
 
     }
 
     function onChange(e) {
-        setForm({ ...formState, [e.target.name]: e.target.value  })
-      }
+        setForm({ ...formState, [e.target.name]: e.target.value })
+    }
 
     return (
-        <div>
-            <div style={{ padding: 30 }}>
-                <input
-                    onChange={onChange}
-                    placeholder="Message"
-                    name="message"
-                    value={formState.message}
-                />
-                <button onClick={sendMessage}>Send Message</button>
-                {
-                    state.messages.map((message, i) => (
-                        <div key={i}>
-                            <h2>{message.message}</h2>
-                            <h3>From: {message.from}</h3>
-                            <p>Date: {message.createdAt}</p>
-                        </div>
-                    ))
-                }
+        <div className="main">
+            <header
+                className='header'><img id='pic' alt='xyec)' src={logo} width="5%" height="100%" align="left" />
+            </header>
+            
+            <div className="Central">
+            <input
+                    className="input"
+                        onChange={onChange}
+                        placeholder="Message"
+                        name="message"
+                        value={formState.message}
+                    />
+                    <button onClick={sendMessage} className="btn">Send Message</button>
+                <div style={{ padding: 30 }}>
+                    {
+                        state.messages.map((message, i) => (
+                            <div key={i}
+                                className='mes'>
+                                <h2>{message.message}</h2>
+                                <h3>From: {message.from}</h3>
+                                <p>Date: {message.createdAt}</p>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )

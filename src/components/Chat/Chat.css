@@ -1,0 +1,76 @@
+.main{
+    background-color: #0C1839;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+.header {
+    width: 100%;
+    height: 10%;
+    background: #708EA4;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    float: left;
+  }
+  .btn{
+    display: inline-block;	
+	  box-sizing: border-box;
+	  padding: 0 20px;
+    margin: 0 15px 15px 0;
+    outline: none;
+    border: none;  
+    border-radius: 6px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #385898;
+    background-color: #e7f3ff;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    margin-top: 5px;
+    }
+    .btn:focus-visible {
+      box-shadow: 0 0 0 2px #666;
+    }
+    .btn:hover {
+      background-color: #DBE7F2;
+    }
+    .btn:active {
+      transform: scale(0.96);
+    }
+  
+  .input{
+    border: solid;
+    border-radius: 4px;
+    border-color: #0C1839;
+    width: 280px;
+    height: 30px;
+    background-color: #0C1839;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    
+  }
+  .Central{
+    border-radius: 4px;
+    overflow: scroll;
+    height: 500px;
+    width: 700px;
+    background-color: #708EA4;
+  }
+  .mes{
+      background-color: #0C1839;
+      border-radius: 8px;
+      font-size: small;
+      width: 100%;
+      height: 20%;
+  }
