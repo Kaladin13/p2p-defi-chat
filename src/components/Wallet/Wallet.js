@@ -2,6 +2,7 @@ import './wallet.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Eth from 'web3-eth';
+import logo from './zerionlogo.jpg';
 
 
 function Wallet() {
@@ -44,7 +45,7 @@ function Wallet() {
                 else {
                     setWallet(res[0]);
                     if (res[0] != null) {
-                        navigate("/chat", { state: { wallet: res[0] } });
+                        navigate("/enter", { state: { wallet: res[0] } });
                     }
                 }
             })
@@ -62,18 +63,26 @@ function Wallet() {
 
     return (
         <div
-            className="App-header">
-            <button
-                id='btn'
-                onClick={isMetaMaskInstalled ? connectMetamask : installMask}>
-                {isMetaMaskInstalled ? "Connect to metamask" : "Install metamask"}
-            </button>
-            <div>
-                {isMetaMaskInstalled ? "MetaMask is installed" : "MetaMask is not installed"}
-                <br></br>
-                {wallet != null ? wallet : "No account connected"}
-            </div>
-        </div>
+            className="App-header"><center>
+                    <header
+                        className='header'><img id='pic' alt='xyec)' src={logo} width="5%" height="100%" align="left" />
+                    </header>
+                <div
+                    className='App-center'><center>
+
+                        <div><center>
+                            {isMetaMaskInstalled ? "MetaMask is installed" : "MetaMask is not installed"}
+                            <br></br>
+                            {wallet != null ? wallet : <small><font color='#6e6e6e'>No account connected</font></small>}
+                        </center></div>
+                        <small id='instbtn'><font color='#6e6e6e'>{isMetaMaskInstalled ? <font color='#708EA4'></font> : "Click install metamask to proceed"}</font></small>
+                        <button
+                            id='btn'
+                            onClick={isMetaMaskInstalled ? connectMetamask : installMask}><center>
+                                {isMetaMaskInstalled ? "Connect to MetaMask" : "Install MetaMask"}
+                            </center></button>
+                    </center> </div>
+            </center></div>
     );
 }
 

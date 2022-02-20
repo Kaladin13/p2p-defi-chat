@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #0C1839;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,11 +40,42 @@
 #btn{
   width: 200px;
   height: 50px;
-
   border-radius: 10px;
   border: solid;
-  border-color: rgb(53, 39, 245);
-  background-color: #708ea4;
+  border-color: #708EA4;
+  background-color: #0C1839;
   font-size: 19px;
-  color: rgb(53, 39, 245);
+  color: white;
+  margin-top: 5px;
+}
+
+.App-center {
+  border-radius:10px ;
+  background-color: #708EA4;
+  height: 115px;
+  width: 300px;
+  align-content: center;
+  align-self: center;
+  margin-top: -5;
+}
+
+.header {
+  width: 100%;
+  height: 10%;
+	background: #708EA4;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  float: left;
+}
+.pic{
+  position: absolute left;
+  float: left;
+  top: 0px;
+  left: 0px;
+}
+
+.instbtn{
+  font-size: smaller;
+  color: gray;
 }
