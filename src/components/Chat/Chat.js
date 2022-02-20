@@ -12,7 +12,7 @@ function Chat() {
 
     let navigate = useNavigate();
 
-    const {roomid} = useParams();
+    const { roomid } = useParams();
 
     const location = useLocation();
 
@@ -32,6 +32,27 @@ function Chat() {
 
     const roomId = location.state.roomId;
 
+
+    const initialState = {
+        messages: []
+    }
+
+    // Create a reducer that will update the messages array
+    function reducer(state, message) {
+        return {
+            messages: [message, ...state.messages]
+        }
+    }
+
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const [it, setIt] = useState(1);
+
+    const [formState, setForm] = useState({
+        message: ''
+    })
+
     const gun = Gun({
         peers: [
             'http://localhost:3030/gun'
@@ -41,7 +62,7 @@ function Chat() {
     let i = 0;
 
     useEffect(() => {
-        
+
         if (partnerWallet == null || wallet == null) {
             navigate("../");
         }
@@ -57,7 +78,9 @@ function Chat() {
             i++;
             if (i % 3 == 0) {
                 console.log(messages);
-                messages = [...messages, m];
+                dispatch({ message: m.message, createdAt: m.createdAt });
+                console.log(state);
+                setIt(it + 1);
             }
         });
 
@@ -70,26 +93,40 @@ function Chat() {
 
         chatRoom.set(
             {
-                name: "Max",
+                message: formState.message,
                 createdAt: Date.now()
             }
         );
 
+        setForm({
+            message: ''
+          });
+
     }
 
+    function onChange(e) {
+        setForm({ ...formState, [e.target.name]: e.target.value  })
+      }
 
     return (
         <div>
-            <button
-                onClick={sendMessage}>
-                Send msg
-            </button>
-            <div>
-                {messages.map(el =>
-                (<div>
-                    {el.name}
-                </div>
-                ))}
+            <div style={{ padding: 30 }}>
+                <input
+                    onChange={onChange}
+                    placeholder="Message"
+                    name="message"
+                    value={formState.message}
+                />
+                <button onClick={sendMessage}>Send Message</button>
+                {
+                    state.messages.map((message, i) => (
+                        <div key={i}>
+                            <h2>{message.message}</h2>
+                            <h3>From: {wallet}</h3>
+                            <p>Date: {message.createdAt}</p>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
